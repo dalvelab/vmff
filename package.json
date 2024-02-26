@@ -1,0 +1,17 @@
+{
+  "name": "vmff_apps",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start:client": "npm start --prefix ./client",
+    "start:server": "npm start --prefix ./server",
+    "dev": "concurrently --kill-others \"npm run dev --prefix ./client\" \"npm run develop --prefix ./server\"",
+    "dev:client": "npm run dev --prefix ./client",
+    "dev:server": "npm run develop --prefix ./server",
+    "build:client": "npm run build --prefix ./client",
+    "build:server": "npm run build --prefix ./server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
