@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "footers",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Footer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::afisha.afisha"
+    },
+    "socials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.social"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}

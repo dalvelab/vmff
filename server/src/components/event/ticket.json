@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_event_tickets",
+  "info": {
+    "displayName": "Ticket"
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "datetime"
+    },
+    "title": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

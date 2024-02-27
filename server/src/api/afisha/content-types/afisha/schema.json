@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "afishas",
+  "info": {
+    "singularName": "afisha",
+    "pluralName": "afishas",
+    "displayName": "Afisha",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tickets": {
+      "type": "component",
+      "repeatable": false,
+      "component": "event.ticket"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::show.show"
+    }
+  }
+}

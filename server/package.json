@@ -22,7 +22,7 @@
     "styled-components": "5.3.3"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Vlad Bragin"
   },
   "strapi": {
     "uuid": "1a9a2d36-03e5-4015-ab84-003ebd4c8a90"
