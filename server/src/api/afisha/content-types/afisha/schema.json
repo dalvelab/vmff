@@ -8,22 +8,30 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "tickets": {
       "type": "component",
       "repeatable": false,
-      "component": "event.ticket"
+      "component": "event.ticket",
+      "required": true
     },
     "event": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::show.show"
+    },
+    "festival": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::festival.festival"
     }
   }
 }

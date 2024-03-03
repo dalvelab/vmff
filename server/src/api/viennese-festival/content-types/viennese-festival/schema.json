@@ -4,26 +4,25 @@
   "info": {
     "singularName": "viennese-festival",
     "pluralName": "viennese-festivals",
-    "displayName": "VienneseFestival",
-    "description": ""
+    "displayName": "VienneseFestival"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
     },
-    "galleries": {
-      "type": "component",
-      "repeatable": true,
-      "component": "common.gallery"
-    },
     "banner": {
       "type": "component",
       "repeatable": false,
       "component": "common.image-with-caption"
+    },
+    "galleries": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.gallery"
     },
     "description": {
       "type": "richtext"

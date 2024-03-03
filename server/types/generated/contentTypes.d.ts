@@ -789,16 +789,16 @@ export interface ApiAboutAbout extends Schema.SingleType {
     singularName: 'about';
     pluralName: 'abouts';
     displayName: 'About';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     images: Attribute.Media;
     description: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::about.about',
       'oneToOne',
@@ -823,19 +823,23 @@ export interface ApiAfishaAfisha extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    title: Attribute.String;
-    tickets: Attribute.Component<'event.ticket'>;
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    tickets: Attribute.Component<'event.ticket'> & Attribute.Required;
     event: Attribute.Relation<
       'api::afisha.afisha',
       'oneToOne',
       'api::show.show'
     >;
+    festival: Attribute.Relation<
+      'api::afisha.afisha',
+      'oneToOne',
+      'api::festival.festival'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::afisha.afisha',
       'oneToOne',
@@ -844,6 +848,37 @@ export interface ApiAfishaAfisha extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::afisha.afisha',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFestivalFestival extends Schema.CollectionType {
+  collectionName: 'festivals';
+  info: {
+    singularName: 'festival';
+    pluralName: 'festivals';
+    displayName: 'Festival';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Unique;
+    slug: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::festival.festival',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::festival.festival',
       'oneToOne',
       'admin::user'
     > &
@@ -860,7 +895,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     locations: Attribute.Relation<
@@ -873,7 +908,6 @@ export interface ApiFooterFooter extends Schema.SingleType {
     email: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::footer.footer',
       'oneToOne',
@@ -895,16 +929,16 @@ export interface ApiLocationLocation extends Schema.CollectionType {
     singularName: 'location';
     pluralName: 'locations';
     displayName: 'Location';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
     link: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::location.location',
       'oneToOne',
@@ -926,15 +960,15 @@ export interface ApiNewsletterNewsletter extends Schema.CollectionType {
     singularName: 'newsletter';
     pluralName: 'newsletters';
     displayName: 'Newsletter';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     email: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::newsletter.newsletter',
       'oneToOne',
@@ -959,10 +993,10 @@ export interface ApiShowShow extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
     age_limit: Attribute.Integer & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
     small_description: Attribute.Text;
@@ -975,7 +1009,6 @@ export interface ApiShowShow extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::show.show', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::show.show', 'oneToOne', 'admin::user'> &
@@ -989,9 +1022,10 @@ export interface ApiSliderSlider extends Schema.SingleType {
     singularName: 'slider';
     pluralName: 'sliders';
     displayName: 'Slider';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     slides: Attribute.Relation<
@@ -1001,7 +1035,6 @@ export interface ApiSliderSlider extends Schema.SingleType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::slider.slider',
       'oneToOne',
@@ -1023,19 +1056,17 @@ export interface ApiVienneseFestivalVienneseFestival extends Schema.SingleType {
     singularName: 'viennese-festival';
     pluralName: 'viennese-festivals';
     displayName: 'VienneseFestival';
-    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     title: Attribute.String;
-    galleries: Attribute.Component<'common.gallery', true>;
     banner: Attribute.Component<'common.image-with-caption'>;
+    galleries: Attribute.Component<'common.gallery', true>;
     description: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::viennese-festival.viennese-festival',
       'oneToOne',
@@ -1071,6 +1102,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::about.about': ApiAboutAbout;
       'api::afisha.afisha': ApiAfishaAfisha;
+      'api::festival.festival': ApiFestivalFestival;
       'api::footer.footer': ApiFooterFooter;
       'api::location.location': ApiLocationLocation;
       'api::newsletter.newsletter': ApiNewsletterNewsletter;

@@ -1,0 +1,1 @@
+export { chakraVMFFConfig } from './config';

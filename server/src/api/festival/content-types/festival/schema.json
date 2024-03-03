@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "locations",
+  "collectionName": "festivals",
   "info": {
-    "singularName": "location",
-    "pluralName": "locations",
-    "displayName": "Location",
+    "singularName": "festival",
+    "pluralName": "festivals",
+    "displayName": "Festival",
     "description": ""
   },
   "options": {
@@ -12,11 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
-      "required": true
+      "unique": true
     },
-    "link": {
+    "slug": {
       "type": "string"
     }
   }

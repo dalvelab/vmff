@@ -1,0 +1,1 @@
+export { InterFont, PlayfairFont } from './fonts';
