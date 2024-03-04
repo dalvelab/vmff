@@ -58,28 +58,24 @@ export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
               pos="relative"
               >
               <SlideContent event={event} location={location}>
-                <Flex 
-                  flexDir={["column", "row", "row", "row", "row"]} 
-                  gap={5} 
-                  alignItems={["flex-start", "center", "center", "center", "center"]}>
+                <Flex gap={5}>
                     <Button 
-                      size="lg" 
+                      size={["md", "md", "lg", "lg", "lg"]}
                       bgColor="brand.200" 
                       color="white"
                       _hover={{ bgColor: "brand.200" }} 
-                      alignSelf="flex-start"
                       >
                         Купить билет
                     </Button>
                     <Link href={`/afisha/${id}-${slug}`}>
                       <Button 
-                        size="lg" 
+                        size={["md", "md", "lg", "lg", "lg"]}
                         bgColor="transparent"
                         border="1px solid"
                         borderColor="brand.200"
                         color="brand.200"
                         _hover={{ bgColor: "brand.200", color: "white" }} 
-                        alignSelf="flex-start"
+
                         >
                           Подробнее
                         </Button>

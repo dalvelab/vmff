@@ -1,2 +1,3 @@
 export { getFooter } from './api';
-export type { Footer } from './model';
+export type { FooterResponse } from './model';
+export { Footer } from './ui';

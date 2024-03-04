@@ -14,7 +14,7 @@ export type StrapiEntityWrapper<Data> = {
 
 export type ApiResponse<Data, Meta> = {
   data: Data;
-  meta?: Meta;
+  meta: Meta | null;
 }
 
 export type StrapiImage = {
@@ -58,4 +58,5 @@ export type Location = {
   id: number;
   name: string;
   link: string;
+  address: string;
 }

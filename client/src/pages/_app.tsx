@@ -3,11 +3,12 @@ import Head from 'next/head'
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 import { Navbar } from "@/widgets";
-import { chakraVMFFConfig } from '@/shared';
+import { Footer } from "@/entities";
+import { chakraVMFFConfig, YAScript } from '@/shared';
 
 const theme = extendTheme({ ...chakraVMFFConfig })
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps ) {
   return (
     <>
     <Head>
@@ -17,12 +18,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <link rel="icon" href="/favicon.png" />
       <meta name="color-scheme" content="light only" />
     </Head>
+    <YAScript />
     <ChakraProvider theme={theme}>
       <Navbar />
       <chakra.main mt={20}>
         <Component {...pageProps} />
       </chakra.main>
-      {/* <Footer /> */}
+      <Footer />
     </ChakraProvider>
   </>
   )

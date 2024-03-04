@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['strapi.vmff.ru']
+    remotePatterns: [{
+      protocol: 'http',
+      hostname: 'strapi.vmff.ru'
+    }]
   }
 };
 

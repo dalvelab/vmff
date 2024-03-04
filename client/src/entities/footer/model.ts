@@ -1,12 +1,12 @@
 import type { Location } from '@/shared';
 
-export type Footer = {
+export type FooterResponse = {
   phone: string;
   email: string;
-  locations: Location[];
+  locations: Location[] | null;
   socials: {
     id: number;
     type: 'vk' | 'telegram';
     link: string;
-  }
+  }[]
 }
