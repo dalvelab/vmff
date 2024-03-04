@@ -832,11 +832,17 @@ export interface ApiAfishaAfisha extends Schema.CollectionType {
       'api::afisha.afisha',
       'oneToOne',
       'api::show.show'
-    >;
+    > &
+      Attribute.Required;
     festival: Attribute.Relation<
       'api::afisha.afisha',
       'oneToOne',
       'api::festival.festival'
+    >;
+    location: Attribute.Relation<
+      'api::afisha.afisha',
+      'oneToOne',
+      'api::location.location'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1002,11 +1008,6 @@ export interface ApiShowShow extends Schema.CollectionType {
     small_description: Attribute.Text;
     description: Attribute.RichText;
     slug: Attribute.String;
-    location: Attribute.Relation<
-      'api::show.show',
-      'oneToOne',
-      'api::location.location'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::show.show', 'oneToOne', 'admin::user'> &
@@ -1056,15 +1057,16 @@ export interface ApiVienneseFestivalVienneseFestival extends Schema.SingleType {
     singularName: 'viennese-festival';
     pluralName: 'viennese-festivals';
     displayName: 'VienneseFestival';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    title: Attribute.String;
-    banner: Attribute.Component<'common.image-with-caption'>;
+    title: Attribute.String & Attribute.Required;
     galleries: Attribute.Component<'common.gallery', true>;
     description: Attribute.RichText;
+    banner: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

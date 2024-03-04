@@ -26,12 +26,18 @@
     "event": {
       "type": "relation",
       "relation": "oneToOne",
+      "required": true,
       "target": "api::show.show"
     },
     "festival": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::festival.festival"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::location.location"
     }
   }
 }

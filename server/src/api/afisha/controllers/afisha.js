@@ -6,25 +6,19 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::afisha.afisha', () => ({
+module.exports = createCoreController('api::afisha.afisha', ({strapi}) => ({
   async find(ctx) {
-    const { data, meta } = await super.find(ctx);
+    const { meta } = await super.find(ctx);
+
+    const data = await strapi.entityService.findMany('api::afisha.afisha', {
+      populate: ['tickets', 'event', 'location', 'event.image'],
+    });
 
     if (!data || data.length === 0) {
       return { data, meta };
     }
 
-    const sortedData = data
-      .map((event) => {
-        return {
-          ...event,
-          tickets: {
-            ...event.tickets,
-            date: new Date(event.attributes.tickets.date).toLocaleString('ru-RU', { timeZone: 'Asia/Yekaterinburg' })
-          }
-        }
-      })
-      .sort((a, b) => new Date(a.attributes.tickets.date) - new Date(b.attributes.tickets.date))
+    const sortedData = data.sort((a, b) => new Date(a.tickets.date) - new Date(b.tickets.date))
 
     return { data: sortedData, meta };
   },

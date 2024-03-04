@@ -11,17 +11,6 @@ export interface CommonGallery extends Schema.Component {
   };
 }
 
-export interface CommonImageWithCaption extends Schema.Component {
-  collectionName: 'components_common_image_with_captions';
-  info: {
-    displayName: 'ImageWithCaption';
-  };
-  attributes: {
-    image: Attribute.Media & Attribute.Required;
-    caption: Attribute.String;
-  };
-}
-
 export interface CommonSocial extends Schema.Component {
   collectionName: 'components_common_socials';
   info: {
@@ -49,7 +38,6 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'common.gallery': CommonGallery;
-      'common.image-with-caption': CommonImageWithCaption;
       'common.social': CommonSocial;
       'event.ticket': EventTicket;
     }
