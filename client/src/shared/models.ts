@@ -14,19 +14,34 @@ export type StrapiEntityWrapper<Data> = {
 
 export type ApiResponse<Data, Meta> = {
   data: Data;
-  meta: Meta;
+  meta?: Meta;
 }
 
 export type StrapiImage = {
-  data: {
-    id: number;
-    attributes: {
-      name: string;
-      url: string;
-      width?: number;
-      height: number;
-    }
+  id: number;
+  name: string;
+  url: string;
+  caption: string | null,
+  width: number;
+  height: number;
+  formats: {
+    thumbnail: StrapiImageFormat;
+    small: StrapiImageFormat;
+    medium: StrapiImageFormat;
+    large: StrapiImageFormat;
   }
+}
+
+export type StrapiImageFormat = {
+  name: string;
+  hash: string;
+  ext: string;
+  mime: string;
+  path: string | null;
+  width: number;
+  height: number;
+  size: number;
+  url: string;
 }
 
 export type StrapiFile = {
@@ -37,4 +52,10 @@ export type StrapiFile = {
     size: number;
     mime: string;
   }
+}
+
+export type Location = {
+  id: number;
+  name: string;
+  link: string;
 }

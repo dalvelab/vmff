@@ -1,25 +1,35 @@
-import type { StrapiEntityWrapper } from '@/shared';
+import type { StrapiImage, Location } from '@/shared';
 
-export type Event = StrapiEntityWrapper<{
+export type Event = {
+  id: number;
   title: string;
   age_limit: number;
   small_description: string;
   description: string;
   slug: string;
-  location: {
-    data: Location;
-  } | null
-}>
+  image: StrapiImage;
+}
 
-export type Afisha = StrapiEntityWrapper<{
+export type Afisha = {
   title: string;
-  tickets: any;
-  event: {
-    data: Event;
-  } | null
-}>
+  tickets: Ticket;
+  event: Event | null;
+  location: Location | null
+}
 
-export type Location = StrapiEntityWrapper<{
-  name: string;
+export type Slider = {
+  slides: {
+    id: number;
+    title: string;
+    location: Afisha["location"];
+    tickets: Afisha["tickets"];
+    event: Event
+  }[];
+}
+
+export type Ticket = {
+  id: number;
+  date: Date;
+  title: string;
   link: string;
-}>
+}

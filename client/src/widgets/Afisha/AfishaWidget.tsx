@@ -3,27 +3,30 @@ import Link from "next/link"
 import { Button, Container, Flex, chakra } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from "swiper/modules";
+import type { Slider } from "@/entities";
 import { isVoid, isEmptyArray } from "@/shared";
 
-// import { SlideContent } from './SlideContent';
+import { SlideContent } from './components';
 
 import 'swiper/css';
 import "swiper/css/pagination";
 
 interface AfishaWidgetProps {
-  slider: any;
+  slider: Slider;
 }
 
 export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
-  const { data } = slider.attributes.slides;
+  const slides = slider.slides;
 
-  if (isVoid(data) || isEmptyArray(data)) {
+  if (isVoid(slides) || isEmptyArray(slides)) {
     return <h1>NO DATA</h1>
   }
 
   const pagination = {
     clickable: true,
   };
+
+  const height = 'calc(100vh - 80px)';
 
   return (
     <Swiper
@@ -36,59 +39,57 @@ export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
         disableOnInteraction: false,
       }}
     >
-    {/* {data.map((slide) => {
-      const { id } = slide;
-      const { title, banner, pushkin_card, slug } = slide.attributes.event.data.attributes;
-
-      const dates = slide.attributes.tickets.map((ticket) => ticket.date);
-      const formattedDate = formatAfishaDays(dates);
+    {slides.map((slide) => {
+      const { event, title, location } = slide;
+      const { id, slug, image } = event;
       
       return (
         <SwiperSlide key={slide.id}>
           <chakra.div 
             w="full"
-            h="100vh"
+            h={height}
             >
             <Container 
               maxWidth="container.xl" 
-              h="100vh" 
+              h="100%" 
               display="flex" 
               alignItems="center" 
               zIndex={1} 
               pos="relative"
               >
-              <SlideContent 
-                event={slide.attributes.event.data.attributes} 
-                formattedDate={formattedDate}>
+              <SlideContent event={event} location={location}>
                 <Flex 
                   flexDir={["column", "row", "row", "row", "row"]} 
                   gap={5} 
                   alignItems={["flex-start", "center", "center", "center", "center"]}>
-                  <Link href={`/afisha/${id}-${slug}`}>
                     <Button 
                       size="lg" 
                       bgColor="brand.200" 
                       color="white"
-                      _hover={{ bgColor: "#4d8a8c" }} 
+                      _hover={{ bgColor: "brand.200" }} 
                       alignSelf="flex-start"
                       >
-                        Подробнее
-                      </Button>
-                  </Link>
-                  {pushkin_card && (
-                    <Image
-                    src='/pushkin-card.png'
-                    alt='Пушкинская карта'
-                    width={150}
-                    height={50}
-                  />
-                  )}
+                        Купить билет
+                    </Button>
+                    <Link href={`/afisha/${id}-${slug}`}>
+                      <Button 
+                        size="lg" 
+                        bgColor="transparent"
+                        border="1px solid"
+                        borderColor="brand.200"
+                        color="brand.200"
+                        _hover={{ bgColor: "brand.200", color: "white" }} 
+                        alignSelf="flex-start"
+                        >
+                          Подробнее
+                        </Button>
+                    </Link>
                 </Flex>
               </SlideContent>
             </Container>
             <chakra.div 
               w="full" 
-              h="100vh" 
+              h={height} 
               pos="absolute" 
               left={0} 
               top={0} 
@@ -97,14 +98,14 @@ export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
             />
             <chakra.div 
               w="full" 
-              h="100vh" 
+              h={height} 
               pos="absolute" 
               left={0} 
               top={0} 
               zIndex='-1'
               >
                 <Image 
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
+                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`}
                   alt={title}
                   fill
                   style={{ objectFit: "cover", border: "none" }}
@@ -114,7 +115,7 @@ export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
           </chakra.div>
         </SwiperSlide>
       )
-    })} */}
+    })}
   </Swiper>
   )
 }
