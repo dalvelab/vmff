@@ -795,8 +795,8 @@ export interface ApiAboutAbout extends Schema.SingleType {
     draftAndPublish: false;
   };
   attributes: {
-    images: Attribute.Media;
-    description: Attribute.RichText;
+    images: Attribute.Media & Attribute.Required;
+    description: Attribute.RichText & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -907,7 +907,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     locations: Attribute.Relation<
       'api::footer.footer',
       'oneToMany',
-      'api::afisha.afisha'
+      'api::location.location'
     >;
     socials: Attribute.Component<'common.social', true>;
     phone: Attribute.String;
@@ -942,7 +942,8 @@ export interface ApiLocationLocation extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    link: Attribute.String;
+    link: Attribute.String & Attribute.Required;
+    address: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

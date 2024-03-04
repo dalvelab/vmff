@@ -15,7 +15,7 @@
     "locations": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::afisha.afisha"
+      "target": "api::location.location"
     },
     "socials": {
       "type": "component",
