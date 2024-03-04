@@ -9,7 +9,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::slider.slider', ({strapi}) => ({
   async find() {
     const data = await strapi.entityService.findMany('api::slider.slider', {
-      populate: ['slides', 'slides.event', 'slides.event.image'],
+      populate: ['slides', 'slides.event', 'slides.event.image', 'slides.tickets', 'slides.location'],
     });
 
     return { data };
