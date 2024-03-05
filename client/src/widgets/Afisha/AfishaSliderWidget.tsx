@@ -31,7 +31,7 @@ export const AfishaSliderWidget: React.FC<AfishaSliderWidgetProps> = ({ slider }
     clickable: true,
   };
 
-  const height = 'calc(100vh - 80px)';
+  const height = '100vh';
 
   return (
     <Swiper

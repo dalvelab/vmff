@@ -19,7 +19,7 @@ export const Navbar = () => {
     <chakra.nav 
       transition="0.1s ease-in"
       w="full" 
-      h={20}
+      h={[16, 20, 20, 20, 20]}
       pos="fixed" 
       borderBottom="1px solid"
       borderColor={opened ? "transparent" : "#CFCBBF"}
@@ -34,13 +34,13 @@ export const Navbar = () => {
             <chakra.div
               opacity={opened ? "0" : "1"} 
               transition="0.1s ease-in" 
-              width="80px" 
-              height="64px" 
+              width={["140px", "180px", "180px", "180px", "180px"]} 
+              height={["40px", "50px", "50px", "50px", "50px"]} 
               position="relative"
               >
                 <Image
                   fill
-                  src="/logo-header.png" 
+                  src="/logo-header.svg" 
                   alt='Логотип в меню' 
                   style={{ fill: "red" }}
                   priority={true}

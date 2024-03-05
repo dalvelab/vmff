@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps ) {
     <YAScript />
     <ChakraProvider theme={theme}>
       <Navbar />
-      <chakra.main mt={20}>
+      <chakra.main mt={[16, 20, 20, 20, 20]}>
         <Component {...pageProps} />
       </chakra.main>
       <Footer />

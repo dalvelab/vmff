@@ -1,9 +1,9 @@
 .sidebarButton {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   background-color: beige;
   border-radius: 10px;
-  padding: 10px;
+  padding: 6px;
 }
 
 .sidebarButton .bar {
@@ -13,17 +13,17 @@
 }
 
 .sidebarButton .bar:first-child {
-  width: 28px;
+  width: 24px;
   margin-top: 0;
 }
 
 .sidebarButton .bar:nth-child(2) {
-  width: 18px;
+  width: 14px;
   transition: 0.2s ease-out;
 }
 
 .sidebarButton .bar:last-child {
-  width: 23px;
+  width: 20px;
 }
 
 .sidebarOpened {

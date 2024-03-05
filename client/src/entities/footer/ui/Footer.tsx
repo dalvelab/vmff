@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
               gap={6}
             >
               <Flex gap={[5, 5, 10, 10, 10]} flexDir={["column", "column", "row", "row", "row"]}>
-                <chakra.div w="120px" h="80px" pos="relative">
+                <chakra.div w="100px" h="80px" pos="relative">
                   <Image fill src="/logo-footer.png" alt="Логотип подвал" />
                 </chakra.div>
                 <Flex flexDir="column">
