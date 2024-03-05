@@ -19,7 +19,7 @@ export const Navbar = () => {
     <chakra.nav 
       transition="0.1s ease-in"
       w="full" 
-      h={[16, 20, 20, 20, 20]}
+      h={16}
       pos="fixed" 
       borderBottom="1px solid"
       borderColor={opened ? "transparent" : "#CFCBBF"}
@@ -34,8 +34,8 @@ export const Navbar = () => {
             <chakra.div
               opacity={opened ? "0" : "1"} 
               transition="0.1s ease-in" 
-              width={["140px", "180px", "180px", "180px", "180px"]} 
-              height={["40px", "50px", "50px", "50px", "50px"]} 
+              width="150px" 
+              height="44px"
               position="relative"
               >
                 <Image
