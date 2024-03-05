@@ -22,4 +22,13 @@ module.exports = createCoreController('api::afisha.afisha', ({strapi}) => ({
 
     return { data: sortedData, meta };
   },
+  async findOne(ctx) {
+    const id = ctx.request.params.id;
+
+    const data = await strapi.entityService.findOne('api::afisha.afisha', id, {
+      populate: ['tickets', 'event', 'location', 'event.image'],
+    });
+
+    return {data}
+  }
 }));
