@@ -11,6 +11,7 @@ export type Event = {
 }
 
 export type Afisha = {
+  id: number;
   title: string;
   tickets: Ticket;
   event: Event | null;

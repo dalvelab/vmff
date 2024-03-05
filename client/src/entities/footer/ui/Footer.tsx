@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from '@chakra-ui/next-js';
 import Image from "next/image";
-import { Box, Button, chakra, color, Container, Flex, Input, InputGroup, InputRightAddon, Text } from "@chakra-ui/react";
+import { Box, chakra, Container, Flex, Text } from "@chakra-ui/react";
 
 import { getFooter } from "../api";
 import { FooterResponse } from "../model";
+import { SubscribeToNewsletter } from "@/features";
 import { ApiResponse, isEmptyArray, isNotVoid, isVoid } from "@/shared";
-
 
 export const Footer: React.FC = () => {
   const [footer, setFooterData] = useState<ApiResponse<FooterResponse, null> | null>(null);
@@ -39,30 +39,7 @@ export const Footer: React.FC = () => {
             flexDir={["column", "column", "column", "row", "row"]}
             gap={5}
           >
-            <Flex w="full">
-              <Text fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]}>
-                Подпишись на новости, чтобы быть <br /> в курсе обновлений
-              </Text>
-            </Flex>
-            <InputGroup w="full" justifyContent={["flex-start", "flex-start", "flex-start", "flex-end", "flex-end"]}>
-              <Input
-                alignSelf="flex-end"
-                maxW="320px"
-                border="none" 
-                borderBottom="1px solid" 
-                borderRadius="none" 
-                outline="none" 
-                color="#A6A6A6"
-                pl={0}
-                type="email"
-                _focus={{outline: "none", boxShadow: "none", borderColor: "white"}}
-                placeholder="E-mail"
-                _placeholder={{color: "#A6A6A6"}}
-              />
-              <InputRightAddon>
-                <Button _hover={{bgColor: "transparent"}}>Подписаться</Button>
-              </InputRightAddon>
-            </InputGroup>
+            <SubscribeToNewsletter />
           </Flex>
           {isLoading || isVoid(footer?.data) ? (
             <Text>Loading footer...</Text>
@@ -75,7 +52,7 @@ export const Footer: React.FC = () => {
             >
               <Flex gap={[5, 5, 10, 10, 10]} flexDir={["column", "column", "row", "row", "row"]}>
                 <chakra.div w="120px" h="80px" pos="relative">
-                  <Text color="brand.200">ЛОГОТИП</Text>
+                  <Image fill src="/logo-footer.png" alt="Логотип подвал" />
                 </chakra.div>
                 <Flex flexDir="column">
                   <Flex flexDir="column" gap={2}>
@@ -92,7 +69,7 @@ export const Footer: React.FC = () => {
                   {isNotVoid(footer?.data.locations) && !isEmptyArray(footer.data.locations) && (
                     footer?.data.locations?.map((location) => (
                       <Flex key={location.id} flexDir="column" gap={1} mt={2}>
-                        <chakra.span fontSize="sm" color="#A6A6A6">Основная площадка</chakra.span>
+                        <chakra.span fontSize="sm" color="#A6A6A6">{location.name}</chakra.span>
                         <Link href={location.link} referrerPolicy="no-referrer" target="_blank">
                           <Text color="white" _hover={{ color: "brand.200" }}>{location.address}</Text>
                         </Link>
@@ -103,23 +80,23 @@ export const Footer: React.FC = () => {
               </Flex>
               <Flex flexDir="column" gap={2} justifyContent={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}>
                 <chakra.span fontSize="sm" color="#A6A6A6" textAlign={["left", "left", "right", "right", "right"]}>Социальные сети</chakra.span>
-                <Flex gap={4}>
+                <Flex gap={4} justifyContent={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}>
                 {isNotVoid(footer?.data.socials) && !isEmptyArray(footer.data.socials) && (
                     footer?.data.socials.map((social) => (
                       <Link key={social.id} href={social.link} referrerPolicy="no-referrer" target="_blank">
-                      <Box 
-                        display="flex" 
-                        justifyContent="center" 
-                        alignItems="center" 
-                        w='48px' 
-                        h='48px'
-                        borderRadius="full" 
-                        bgColor="white" 
-                        color="white"
-                        pos="relative"
-                        >
-                        <Image width={30} height={30} src={`/${social.type}-icon.svg`} alt={`иконка ${social.type}`} />
-                      </Box>
+                        <Box 
+                          display="flex" 
+                          justifyContent="center" 
+                          alignItems="center" 
+                          w='48px' 
+                          h='48px'
+                          borderRadius="full" 
+                          bgColor="white" 
+                          color="white"
+                          pos="relative"
+                          >
+                          <Image width={30} height={30} src={`/${social.type}-icon.svg`} alt={`иконка ${social.type}`} />
+                        </Box>
                       </Link>
                     ))
                   )}
@@ -128,7 +105,8 @@ export const Footer: React.FC = () => {
             </Flex>
           )}
           <Flex 
-            pt={10} 
+            pt={10}
+            pb={2}
             color="#A6A6A6" 
             justifyContent="space-between" 
             flexDirection={["column-reverse", "column-reverse", "row", "row", "row"]} 

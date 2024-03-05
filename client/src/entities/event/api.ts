@@ -22,6 +22,16 @@ export async function getAfisha(params: DefaultParams): Promise<ApiResponse<Afis
   return res.json()
 }
 
+interface GetSingleAfisha {
+  id?: string;
+}
+
+export async function getSingleAfisha(params: GetSingleAfisha): Promise<ApiResponse<Afisha, null>> {
+  const res = await fetch(`${process.env.DB_HOST}/afishas/${params.id}`);
+
+  return res.json()
+}
+
 export async function getSlider(): Promise<ApiResponse<Slider, null>> {
   const res = await fetch(`${process.env.DB_HOST}/slider`);
 

@@ -1,1 +1,1 @@
-export * from './AfishaWidget';
+export * from './AfishaSliderWidget';

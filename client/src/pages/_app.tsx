@@ -6,6 +6,8 @@ import { Navbar } from "@/widgets";
 import { Footer } from "@/entities";
 import { chakraVMFFConfig, YAScript } from '@/shared';
 
+import '../shared/styles.css';
+
 const theme = extendTheme({ ...chakraVMFFConfig })
 
 export default function App({ Component, pageProps }: AppProps ) {

@@ -1,11 +1,12 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from "next/head";
-import { Heading, Container, chakra, Flex, Grid, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
+import { Button, Heading, Container, chakra, Flex, Grid, Text } from '@chakra-ui/react';
 
 import { CardAfisha, getAfisha, getSlider } from '@/entities';
 import type { Afisha, Slider } from '@/entities';
 import { isVoid, type ApiResponse, type Meta, isNotVoid } from '@/shared';
-import { AfishaWidget } from '@/widgets';
+import { AfishaSliderWidget } from '@/widgets';
 import { AboutSectionResponse, getAbout } from '@/entities/about';
 import Image from 'next/image';
 
@@ -18,8 +19,8 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AfishaWidget slider={slider.data} />
-      <chakra.section pt={10} pb={10} id="afisha">
+      <AfishaSliderWidget slider={slider.data} />
+      <chakra.section pt={10} pb={10} id="afisha" scrollMarginTop={20}>
         <Container 
           maxWidth="container.xl" 
           h="100%" 
@@ -29,20 +30,32 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
           >
           <Heading as="h2" fontSize={["4xl", "4xl", "5xl", "6xl", "7xl"]}>Афиша</Heading>
           <Flex mt={[5, 10, 10, 10, 10]} flexDir="column" gap={5}>
-            {afisha.data.map(({event, tickets, location}) => {
+            {afisha.data.map(({id, event, tickets, location}) => {
+              if (isVoid(event) || isVoid(tickets)) {
+                return;
+              }
 
-            if (isVoid(event) || isVoid(tickets)) {
-              return;
-            }
-
-            return (
-              <CardAfisha key={event.id} event={event} location={location} />
-            )
-              })}
-            </Flex>
+              return (
+                <CardAfisha key={id} event={event} location={location} tickets={tickets} />
+              )
+            })}
+          </Flex>
+          <Link href="/afisha" mt={10} alignSelf="center">
+            <Button 
+              size="lg"
+              bgColor="transparent"
+              border="1px solid"
+              borderColor="brand.200"
+              justifySelf="center"
+              color="brand.200"
+              _hover={{ bgColor: "brand.200", color: "white" }} 
+              >
+              Все мероприятия
+            </Button>
+          </Link>
         </Container>
       </chakra.section>
-      <chakra.section pt={[5, 10, 10, 10, 10]} pb={10} id="about">
+      <chakra.section pt={[5, 10, 10, 10, 10]} pb={10} id="about" scrollMarginTop={20}>
         <Container 
           maxWidth="container.xl" 
           h="100%" 
@@ -85,7 +98,7 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
             </chakra.div>
             </Flex>
             <Flex pt={[6, 6, 6, 10, 10]} maxW={["full", "full", "full", "400px", "460px"]}>
-              <Text fontSize="xl" textAlign="justify">{about.data.description}</Text>
+              <Text fontSize={["lg", "xl", "xl", "xl", "xl"]} textAlign="justify">{about.data.description}</Text>
             </Flex>
           </Flex>
         </Container>

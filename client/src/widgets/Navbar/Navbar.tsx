@@ -51,7 +51,7 @@ export const Navbar = () => {
             <NavbarLink href={isWelcomePage ? '#afisha' : '/afisha'} text='Афиша и билеты' />
             <NavbarLink href={isWelcomePage ? '#about' : '/#about'} text='О проекте' />
             <NavbarLink href={isWelcomePage ? '#contacts' : '/#contacts'} text='Контакты' />
-            <NavbarLink href='/afisha' text='#ИсторияВенского' />
+            {/* <NavbarLink href='/afisha' text='#ИсторияВенского' /> */}
           </Flex>
           <chakra.div
             display={['block', 'block', 'block', 'none', 'none']}

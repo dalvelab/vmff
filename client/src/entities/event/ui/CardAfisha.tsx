@@ -2,16 +2,31 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { chakra, Button, Flex, Text, Heading, Tag } from '@chakra-ui/react';
 
-import type { Event } from '../model';
+import type { Event, Ticket } from '../model';
 
-import { Location, LocationText } from '@/shared';
+import { Location, LocationText, getformatDateLocale, getGenetiveRusMonth, getformatDateLocaleTime, shortRusDayNames } from '@/shared';
 
 interface CardAfishaProps {
   event: Event
   location: Location | null;
+  tickets: Ticket;
 }
 
-export const CardAfisha: React.FC<CardAfishaProps> = ({event, location}) => {
+export const CardAfisha: React.FC<CardAfishaProps> = ({event, location, tickets}) => {
+  const { date, link } = tickets;
+
+  const formattedDate = getformatDateLocale(date);
+  const day = Number(formattedDate.split('.')[0]);
+  const monthIndex = Number(formattedDate.split('.')[1]);
+  const month = getGenetiveRusMonth(monthIndex);
+  const time = getformatDateLocaleTime(date);
+  const dayOfWeek = shortRusDayNames[new Date(date).getDay()];
+
+  function handleYandexWidget(id: string) {
+    // @ts-ignore
+    window['YandexTicketsDealer'].push(['getDealer', function(dealer) { dealer.open({ id, type: 'session' }) }])
+  }
+
   return (
     <Flex 
       key={event.id}
@@ -40,7 +55,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location}) => {
           <Text 
             pos="relative" 
             _after={{
-              content: `'вт'`, 
+              content: `'${dayOfWeek}'`, 
               fontSize: "md", 
               position: "absolute", 
               top: "0", 
@@ -48,10 +63,10 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location}) => {
               display: ["none", "none", "block", "block", "block",],
             }}
             >
-              21 марта
+              {day} {month}
           </Text>
-          <chakra.span display={["block", "block", "none"]}>-</chakra.span>
-          <Text> 19:00</Text>
+          <chakra.span display={["block", "block", "none"]}> - </chakra.span>
+          <Text>{time}</Text>
           <chakra.div display={["none", "none", "none", "none", "block"]}>
             <LocationText location={location} />
           </chakra.div>
@@ -81,7 +96,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location}) => {
                 {event.age_limit}+
               </Tag>
             </Flex>
-          <chakra.div display={["block", "block", "block", "block", "nonr"]}>
+          <chakra.div display={["block", "block", "block", "block", "none"]}>
             <LocationText location={location} />
           </chakra.div>
           <Flex 
@@ -94,6 +109,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location}) => {
                 bgColor="brand.200" 
                 color="white"
                 _hover={{ bgColor: "brand.200" }} 
+                onClick={() => handleYandexWidget(link)}
                 >
                   Купить билет
               </Button>

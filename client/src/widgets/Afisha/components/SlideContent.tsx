@@ -1,16 +1,24 @@
 import { Flex, Text, Heading, Tag } from "@chakra-ui/react";
 
-import type { Event } from "@/entities"
-import { Location, LocationText } from "@/shared";
+import type { Event, Ticket } from "@/entities"
+import { getformatDateLocale, getformatDateLocaleTime, getGenetiveRusMonth, Location, LocationText } from "@/shared";
 
 interface SlideContentProps {
   event: Event;
   children: React.ReactNode;
   location: Location | null;
+  tickets: Ticket;
 }
 
-export const SlideContent: React.FC<SlideContentProps> = ({event, children, location}) => {
+export const SlideContent: React.FC<SlideContentProps> = ({ event, children, location, tickets }) => {
   const { title, small_description, age_limit } = event;
+  const { date } = tickets;
+
+  const formattedDate = getformatDateLocale(date);
+  const day = Number(formattedDate.split('.')[0]);
+  const monthIndex = Number(formattedDate.split('.')[1]);
+  const month = getGenetiveRusMonth(monthIndex);
+  const time = getformatDateLocaleTime(date);
 
   return (
     <Flex maxW="container.md" flexDir="column" gap={[3, 4, 5, 5, 5]} mt="100px">
@@ -19,9 +27,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({event, children, loca
         color="white" 
         fontSize={["2xl", "2xl", "2xl", "2xl", "4xl"]}>
         <Text>
-          21 марта
+          {day} {month}
         </Text>
-        <Text>19:00</Text>
+        <Text>{time}</Text>
       </Flex>
       <Heading 
         textTransform="uppercase" 

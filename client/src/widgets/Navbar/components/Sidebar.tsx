@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Flex, Modal, ModalBody, ModalContent, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 interface SidebarProps {
   onClose: () => void;
@@ -8,6 +9,10 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
+  const router = useRouter();
+
+  const isWelcomePage = router.pathname === '/';
+
   return (
     <Modal autoFocus={false} onClose={onClose} size="full" isOpen={isOpen}>
       <ModalContent>
@@ -29,22 +34,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
         <Link href="/" onClick={onClose}>
           <Text>Главная</Text>
         </Link>
-        <Link href="/afisha" onClick={onClose}>
+        <Link href={isWelcomePage ? '#afisha' : '/afisha'} onClick={onClose}>
           <Text>Афиша</Text>
         </Link>
-        <Link href="/season" onClick={onClose}>
-          <Text>Сезон Fazioli</Text>
+        <Link href={isWelcomePage ? '#about' : '/#about'} onClick={onClose}>
+          <Text>О проекте</Text>
         </Link>
-        <Link href="/perfomances" onClick={onClose}>
-          <Text>Спектакли</Text>
-        </Link>
-        <Link href="/about" onClick={onClose}>
-          <Text>О театре</Text>
-        </Link>
-        <Link href="/news" onClick={onClose}>
-          <Text>Новости</Text>
-        </Link>
-        <Link href="/contacts" onClick={onClose}>
+        <Link href={isWelcomePage ? '#contacts' : '/#contacts'} onClick={onClose}>
           <Text>Контакты</Text>
         </Link>
       </Flex>

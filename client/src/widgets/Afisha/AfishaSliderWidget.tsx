@@ -11,12 +11,17 @@ import { SlideContent } from './components';
 import 'swiper/css';
 import "swiper/css/pagination";
 
-interface AfishaWidgetProps {
+interface AfishaSliderWidgetProps {
   slider: Slider;
 }
 
-export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
+export const AfishaSliderWidget: React.FC<AfishaSliderWidgetProps> = ({ slider }) => {
   const slides = slider.slides;
+  
+  function handleYandexWidget(id: string) {
+    // @ts-ignore
+    window['YandexTicketsDealer'].push(['getDealer', function(dealer) { dealer.open({ id, type: 'session' }) }])
+  }
 
   if (isVoid(slides) || isEmptyArray(slides)) {
     return <h1>NO DATA</h1>
@@ -40,7 +45,7 @@ export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
       }}
     >
     {slides.map((slide) => {
-      const { event, title, location } = slide;
+      const { event, title, location, tickets } = slide;
       const { id, slug, image } = event;
       
       return (
@@ -57,13 +62,14 @@ export const AfishaWidget: React.FC<AfishaWidgetProps> = ({ slider }) => {
               zIndex={1} 
               pos="relative"
               >
-              <SlideContent event={event} location={location}>
+              <SlideContent event={event} location={location} tickets={tickets}>
                 <Flex gap={5}>
                     <Button 
                       size={["md", "md", "lg", "lg", "lg"]}
                       bgColor="brand.200" 
                       color="white"
-                      _hover={{ bgColor: "brand.200" }} 
+                      _hover={{ bgColor: "brand.200" }}
+                      onClick={() => handleYandexWidget(tickets.link)}
                       >
                         Купить билет
                     </Button>
