@@ -48,8 +48,18 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
           flexDir="column"
           pos="relative"
         >
-          <Flex gap={10} alignItems="center">
-            <chakra.div pos="relative" w="600px" h="400px">
+          <Flex 
+            gap={[5, 5, 10, 10, 10]} 
+            alignItems={["flex-start", "flex-start", "flex-start", "center", "center"]}
+            flexDir={["column", "column", "column", "row", "row"]}
+          >
+            <chakra.div 
+              pos="relative" 
+              maxW={["100%", "100%", "520px", "500px", "600px"]} 
+              minW={["100%", "100%", "520px", "500px", "600px"]} 
+              w="100%" 
+              h={["300px", "400px", "380px", "360px", "400px"]}
+            >
               <Image fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} alt={title} />
             </chakra.div>
             <Flex flexDirection="column" alignItems="flex-start">
