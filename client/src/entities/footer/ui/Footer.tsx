@@ -54,10 +54,10 @@ export const Footer: React.FC = () => {
                 <chakra.div w="100px" h="80px" pos="relative">
                   <Image fill src="/logo-footer.png" alt="Логотип подвал" />
                 </chakra.div>
-                <Flex flexDir="column">
+                <Flex flexDir={["column", "column", "column", "row", "row"]} gap={[5, 5, 5, 10, 10]}>
                   <Flex flexDir="column" gap={2}>
                     <chakra.span fontSize="sm" color="#A6A6A6">По всем вопросам</chakra.span>
-                    <Flex color="white" fontSize="md" gap={4}>
+                    <Flex color="white" fontSize="md" gap={4} flexDir="column">
                       <Link href={`tel:${footer?.data.phone}`} _hover={{ color: "brand.200" }}>
                         <Text>{footer?.data.phone}</Text>
                       </Link>
@@ -66,19 +66,21 @@ export const Footer: React.FC = () => {
                       </Link>
                     </Flex>
                   </Flex>
-                  {isNotVoid(footer?.data.locations) && !isEmptyArray(footer.data.locations) && (
-                    footer?.data.locations?.map((location) => (
-                      <Flex key={location.id} flexDir="column" gap={1} mt={2}>
-                        <chakra.span fontSize="sm" color="#A6A6A6">{location.name}</chakra.span>
-                        <Link href={location.link} referrerPolicy="no-referrer" target="_blank">
-                          <Text color="white" _hover={{ color: "brand.200" }}>{location.address}</Text>
-                        </Link>
-                      </Flex>
-                    ))
-                  )}
+                  <Flex flexDir="column" gap={4}>
+                    {isNotVoid(footer?.data.locations) && !isEmptyArray(footer.data.locations) && (
+                      footer?.data.locations?.map((location) => (
+                        <Flex key={location.id} flexDir="column" gap={2}>
+                          <chakra.span fontSize="sm" color="#A6A6A6">{location.name}</chakra.span>
+                          <Link href={location.link} referrerPolicy="no-referrer" target="_blank">
+                            <Text color="white" _hover={{ color: "brand.200" }}>{location.address}</Text>
+                          </Link>
+                        </Flex>
+                      ))
+                    )}
+                  </Flex>
                 </Flex>
               </Flex>
-              <Flex flexDir="column" gap={2} justifyContent={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}>
+              <Flex flexDir="column" gap={2} justifyContent="flex-start">
                 <chakra.span fontSize="sm" color="#A6A6A6" textAlign={["left", "left", "right", "right", "right"]}>Социальные сети</chakra.span>
                 <Flex gap={4} justifyContent={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}>
                 {isNotVoid(footer?.data.socials) && !isEmptyArray(footer.data.socials) && (

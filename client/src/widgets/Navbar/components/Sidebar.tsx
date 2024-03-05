@@ -26,7 +26,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
         top={0} 
         left={0}
         justifyContent="center"
-        fontSize="4xl"
+        fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}
         color="gray.900"
         pl={6}
         gap={4}
@@ -42,6 +42,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
         </Link>
         <Link href={isWelcomePage ? '#contacts' : '/#contacts'} onClick={onClose}>
           <Text>Контакты</Text>
+        </Link>
+        <Link href="/viennese-festival" onClick={onClose}>
+          <Text>#ИсторияВенского</Text>
         </Link>
       </Flex>
       </ModalBody>

@@ -14,7 +14,7 @@ export const LocationText:React.FC<LocationTextProps> = ({location, type = 'dark
   }
 
   return (
-    <Flex gap={2} alignItems="center">
+    <Flex gap={2} alignItems="flex-start">
       <Image width={24} height={24} src="/location-icon.svg" alt='location icon'></Image>
       <Text fontSize="sm" color={type === 'dark' ? 'brand.100' : 'white'} fontWeight={400}>{location.name}</Text>
     </Flex>

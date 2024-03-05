@@ -66,15 +66,13 @@ export const SubscribeToNewsletter = () => {
   return (
     <>
       <Flex w="full">
-        <Text fontSize={["xl", "xl", "xl", "3xl", "3xl"]}>
-          Подпишись на новости, чтобы быть <chakra.br display={["none", "none", "none", "block", "block"]} /> в курсе обновлений
+        <Text fontSize={["xl", "xl", "2xl", "3xl", "3xl"]}>
+          Подпишись на новости, чтобы быть в курсе обновлений
         </Text>
       </Flex>
-      <InputGroup w="full" justifyContent={["flex-start", "flex-start", "flex-start", "flex-end", "flex-end"]}>
-        <Flex flexDir="column">
+      <InputGroup>
+        <Flex flexDir="column" w={["100%", "50%", "50%", "100%", "100%"]}>
           <Input
-            alignSelf="flex-end"
-            maxW="320px"
             border="none" 
             borderBottom="1px solid" 
             borderRadius="none"

@@ -13,7 +13,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ opened, onClick }) => {
     className={`${styles.sidebarButton} ${
       opened ? styles.sidebarOpened : null
     }`}
-    bgColor="brand.200"
+    bgColor="brand.100"
     display="flex"
     flexDir="column"
     alignItems="flex-start"

@@ -3,18 +3,21 @@ import Head from "next/head";
 import { Heading, Container, chakra, Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
+import { AfishaFilters } from '@/features';
 import { CardAfisha, getAfisha, getFilteredAfisha } from '@/entities';
-import type { Afisha } from '@/entities';
-import { isVoid, rusMonths, isEmptyArray, getformatDateLocale, type ApiResponse, type Meta } from '@/shared';
+import type { Afisha, Filter } from '@/entities';
+import { isVoid, getformatDateLocale, type ApiResponse, type Meta } from '@/shared';
 
-import styles from './styles.module.css';
+const defaultFilter: Filter = {
+  month: 'all',
+  location: 'all'
+}
 
 export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [filter, setFilter] = useState<string>('all');
+  const [filter, setFilter] = useState(defaultFilter);
 
   const ticketMonths = afisha.data
-    .map((event) => getformatDateLocale(event.tickets.date).toString().substring(3, 5))
-    .flat();
+    .map((event) => getformatDateLocale(event.tickets.date).toString().substring(3, 5));
   
   const uniqueTicketMonths = new Set<string>();
 
@@ -39,34 +42,7 @@ export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof ge
           pos="relative"
           >
           <Heading as="h2" fontSize={["4xl", "4xl", "5xl", "6xl", "6xl"]}>Все мероприятия</Heading>
-          <Flex className={styles.filters} mt={6} gap={6} position="relative" overflowX="scroll">
-            {!isEmptyArray(data) && (
-              <chakra.button 
-                fontSize="2xl" 
-                fontWeight="medium" 
-                color={filter === 'all' ? "brand.200" : "gray.900"} 
-                pos="relative"
-                onClick={() => setFilter('all')}
-                _after={{ content: filter === 'all' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
-                >
-                  Ближайшие
-              </chakra.button>
-            )}
-            {Array.from(uniqueTicketMonths).map((month) => (
-              <chakra.button 
-                key={month}
-                fontSize="2xl" 
-                fontWeight="medium" 
-                color={filter === month ? "brand.200" : "gray.900"} 
-                pos="relative"
-                _after={{ content: filter === month ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
-                onClick={() => setFilter(month)}
-                textTransform="capitalize"
-                >
-                {rusMonths[Number(month) - 1]}
-            </chakra.button>
-            ))}
-          </Flex>
+          <AfishaFilters data={data} months={uniqueTicketMonths} filter={filter} setFilter={setFilter} />
           <Flex mt={[5, 10, 10, 10, 10]} flexDir="column" gap={5}>
             {data.map(({id, event, tickets, location}) => {
               if (isVoid(event) || isVoid(tickets)) {

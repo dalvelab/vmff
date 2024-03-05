@@ -42,9 +42,10 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location, tickets}
         w="full"
         flexDir={["column", "column", "column", "column", "row"]}
         justifyContent="space-between"
-        gap={2}
+        gap={[2, 2, 2, 2, 10,]}
       >
-        <Flex 
+        <Flex
+          w="200px"
           flexDir={["row", "row", "column", "column", "column"]}
           color="brand.100" 
           fontSize={["lg", "lg", "xl", "2xl", "3xl"]} 

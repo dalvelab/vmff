@@ -1,0 +1,12 @@
+.filters {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filters::-webkit-scrollbar-thumb {
+  display: none;
+}
