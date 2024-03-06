@@ -12,5 +12,18 @@ export const getFilteredAfisha = (data: Afisha[], filter: Filter) => {
     return data;
   }
 
-  return data.filter((event) => getformatDateLocale(event.tickets.date).split(',').toString().substring(3, 5) === filter.month);
+  if (filter.month === 'all' && filter.location !== 'all') {
+    return data.filter((event) => event.location?.name === filter.location);
+  }
+
+  if (filter.month !== 'all' && filter.location === 'all') {
+    return data.filter((event) => getformatDateLocale(event.tickets.date).split(',').toString().substring(3, 5) === filter.month);
+  }
+
+  return data.filter((event) => {
+    const isDateEqual = getformatDateLocale(event.tickets.date).split(',').toString().substring(3, 5) === filter.month;
+    const isLocationEqual = event.location?.name === filter.location;
+
+    return isDateEqual && isLocationEqual;
+  });
 }

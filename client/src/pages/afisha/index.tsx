@@ -1,12 +1,12 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from "next/head";
-import { Heading, Container, chakra, Flex } from '@chakra-ui/react';
+import { Heading, Container, chakra, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { AfishaFilters } from '@/features';
 import { CardAfisha, getAfisha, getFilteredAfisha } from '@/entities';
 import type { Afisha, Filter } from '@/entities';
-import { isVoid, getformatDateLocale, type ApiResponse, type Meta } from '@/shared';
+import { isVoid, getformatDateLocale, type ApiResponse, type Meta, isNotVoid, isEmptyArray } from '@/shared';
 
 const defaultFilter: Filter = {
   month: 'all',
@@ -22,6 +22,14 @@ export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof ge
   const uniqueTicketMonths = new Set<string>();
 
   ticketMonths.map((ticket) => uniqueTicketMonths.add(ticket));
+
+  const uniqueLocations = new Set<string>();
+
+  afisha.data.forEach((event) => {
+    if (isNotVoid(event.location?.name)) {
+      uniqueLocations.add(event.location.name)
+    }
+  });
 
   const data = getFilteredAfisha(afisha.data, filter);
 
@@ -42,8 +50,12 @@ export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof ge
           pos="relative"
           >
           <Heading as="h2" fontSize={["4xl", "4xl", "5xl", "6xl", "6xl"]}>Все мероприятия</Heading>
-          <AfishaFilters data={data} months={uniqueTicketMonths} filter={filter} setFilter={setFilter} />
-          <Flex mt={[5, 10, 10, 10, 10]} flexDir="column" gap={5}>
+          <AfishaFilters data={afisha.data} months={Array.from(uniqueTicketMonths)} filter={filter} setFilter={setFilter} locations={Array.from(uniqueLocations)} />
+          <Flex mt={[5, 10, 10, 10, 10]} flexDir="column" gap={5} minH="400px">
+            {isEmptyArray(data) && (
+              <Text fontSize="xl">Мероприятий не найдено. Попробуйте изменить фильтр</Text>
+            )}
+
             {data.map(({id, event, tickets, location}) => {
               if (isVoid(event) || isVoid(tickets)) {
                 return;

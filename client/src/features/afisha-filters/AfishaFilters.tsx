@@ -1,34 +1,26 @@
-import { useState } from 'react';
-import { Badge, Button, chakra, Checkbox, Flex, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Button, chakra,  Flex, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 
-import { isEmptyArray, isNotVoid, rusMonths } from '@/shared';
+import { isEmptyArray, rusMonths } from '@/shared';
 
 import styles from './styles.module.css';
 import type { Afisha, Filter } from '@/entities';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 interface AfishaFiltersProps {
   data: Afisha[];
   filter: Filter;
   setFilter: (filter: Filter) => void;
-  months: Set<string>;
+  months: string[];
   locations: string[];
 }
 
-export const AfishaFilters: React.FC<AfishaFiltersProps> = ({ data, filter, setFilter, months }) => {
-  const uniqueLocations = new Set<string>();
-
-  data.forEach((event) => {
-    if (isNotVoid(event.location)) {
-      uniqueLocations.add(event.location?.name)
-    }
-  });
-
+export const AfishaFilters: React.FC<AfishaFiltersProps> = ({ data, filter, setFilter, months, locations }) => {
   function handleMenuClick(location: string) {
     setFilter({...filter, location});
   }
 
   return (
-    <Flex justifyContent="space-between">
+    <Flex flexDir="column" alignItems="flex-start" gap={6}>
       <Flex className={styles.filters} mt={6} gap={6} position="relative" overflowX="scroll">
         {!isEmptyArray(data) && (
           <chakra.button 
@@ -42,7 +34,7 @@ export const AfishaFilters: React.FC<AfishaFiltersProps> = ({ data, filter, setF
               Ближайшие
           </chakra.button>
         )}
-        {Array.from(months).map((month) => (
+        {months.map((month) => (
           <chakra.button 
             key={month}
             fontSize="2xl" 
@@ -65,14 +57,23 @@ export const AfishaFilters: React.FC<AfishaFiltersProps> = ({ data, filter, setF
             as={Button}
             border="1px solid"
             borderColor="brand.300"
+            rightIcon={<ChevronDownIcon fontSize="2xl" />}
             bg="transparent"
             _active={{bgColor: "transparent"}}
             _hover={{bgColor: "transparent"}}
           >
-            {filter.location === 'all' ? 'Все площадки' : filter.location}
+            <chakra.div maxW="180px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">{filter.location === 'all' ? 'Все площадки' : filter.location}</chakra.div>
           </MenuButton>
           <MenuList borderColor="brand.300" p={2}>
-            {Array.from(uniqueLocations).map((location) => (
+            <MenuItem 
+              borderRadius={4}
+              _focus={{bgColor: "transparent"}} 
+              _hover={{bgColor: "rgba(0, 0, 0, 0.04)"}}
+              onClick={() => handleMenuClick('all')}
+            >
+              Все площадки
+            </MenuItem>
+            {locations.map((location) => (
               <MenuItem 
                 key={location}
                 borderRadius={4}
