@@ -1068,6 +1068,8 @@ export interface ApiVienneseFestivalVienneseFestival extends Schema.SingleType {
     galleries: Attribute.Component<'common.gallery', true>;
     description: Attribute.RichText;
     banner: Attribute.Media & Attribute.Required;
+    subtitle: Attribute.String;
+    image_about: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
