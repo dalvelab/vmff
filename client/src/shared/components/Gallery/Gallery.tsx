@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import Image from 'next/image';
 
+import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { chakra } from "@chakra-ui/react";
 
 import styles from "./styles.module.css";
@@ -55,6 +55,7 @@ export const Gallery: React.FC<IProps> = (props) => {
               h="40px"
               borderRadius="full"
               bgColor="brand.100"
+              color="white"
               pos="absolute"
               top="50%"
               left="8px"
@@ -65,18 +66,13 @@ export const Gallery: React.FC<IProps> = (props) => {
               justifyContent="center"
               alignItems="center"
             >
-              <Image
-                src="/chevron.png"
-                width={10}
-                height={18}
-                alt="иконка галерии назад"
-                style={{ rotate: "180deg" }}
-              />
+                <ChevronLeftIcon fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]} />
             </chakra.button>
             <chakra.button
               w="40px"
               h="40px"
               borderRadius="full"
+              color="white"
               bgColor="brand.100"
               pos="absolute"
               top="50%"
@@ -89,12 +85,7 @@ export const Gallery: React.FC<IProps> = (props) => {
               justifyContent="center"
               alignItems="center"
             >
-              <Image
-                src="/chevron.png"
-                width={10}
-                height={18}
-                alt="иконка галерии вперед"
-              />
+              <ChevronRightIcon fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]} />
             </chakra.button>
           </>
         )}
