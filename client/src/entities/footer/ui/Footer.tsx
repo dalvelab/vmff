@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
                   </Flex>
                 </Flex>
               </Flex>
-              <Flex flexDir="column" gap={2} justifyContent="flex-start">
+              <Flex flexDir="column" gap={4} justifyContent="flex-start">
                 <chakra.span fontSize="sm" color="#A6A6A6" textAlign={["left", "left", "right", "right", "right"]}>Социальные сети</chakra.span>
                 <Flex gap={4} justifyContent={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}>
                 {isNotVoid(footer?.data.socials) && !isEmptyArray(footer.data.socials) && (

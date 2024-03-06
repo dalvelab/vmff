@@ -44,7 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
           <Text>Контакты</Text>
         </Link>
         <Link href="/viennese-festival" onClick={onClose}>
-          <Text>#ИсторияВенского</Text>
+          <Text>История Венского</Text>
         </Link>
       </Flex>
       </ModalBody>
