@@ -1,7 +1,7 @@
 import { Flex, Text, Heading, Tag } from "@chakra-ui/react";
 
 import type { Event, Ticket } from "@/entities"
-import { getformatDateLocale, getformatDateLocaleTime, getGenetiveRusMonth, Location, LocationText } from "@/shared";
+import { getformatDateLocale, getformatDateLocaleTime, getGenetiveRusMonth, isNotVoid, Location, LocationText } from "@/shared";
 
 interface SlideContentProps {
   event: Event;
@@ -42,7 +42,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({ event, children, loc
         {title}       
       </Heading>
       <LocationText location={location} type="light" />
-      <Flex alignItems="center" gap={3}>
+      <Flex alignItems="center" gap={isNotVoid(small_description) ? 3 : 0}>
         <Text color="white" fontSize={["md", "xl"]}>{small_description}</Text>
         <Tag 
           p={1.5} 

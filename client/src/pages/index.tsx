@@ -36,7 +36,7 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
               }
 
               return (
-                <CardAfisha key={id} event={event} location={location} tickets={tickets} />
+                <CardAfisha key={id} id={id} event={event} location={location} tickets={tickets} />
               )
             })}
           </Flex>

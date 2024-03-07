@@ -45,8 +45,8 @@ export const AfishaSliderWidget: React.FC<AfishaSliderWidgetProps> = ({ slider }
       }}
     >
     {slides.map((slide) => {
-      const { event, title, location, tickets } = slide;
-      const { id, slug, image } = event;
+      const { event, title, location, tickets, id } = slide;
+      const { slug, image } = event;
       
       return (
         <SwiperSlide key={slide.id}>

@@ -4,15 +4,16 @@ import { chakra, Button, Flex, Text, Heading, Tag } from '@chakra-ui/react';
 
 import type { Event, Ticket } from '../model';
 
-import { Location, LocationText, getformatDateLocale, getGenetiveRusMonth, getformatDateLocaleTime, shortRusDayNames } from '@/shared';
+import { Location, LocationText, getformatDateLocale, getGenetiveRusMonth, getformatDateLocaleTime, shortRusDayNames, isNotVoid } from '@/shared';
 
 interface CardAfishaProps {
+  id: number;
   event: Event
   location: Location | null;
   tickets: Ticket;
 }
 
-export const CardAfisha: React.FC<CardAfishaProps> = ({event, location, tickets}) => {
+export const CardAfisha: React.FC<CardAfishaProps> = ({ id, event, location, tickets}) => {
   const { date, link } = tickets;
 
   const formattedDate = getformatDateLocale(date);
@@ -46,6 +47,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location, tickets}
       >
         <Flex
           w="200px"
+          minW="200px"
           flexDir={["row", "row", "column", "column", "column"]}
           color="brand.100" 
           fontSize={["lg", "lg", "xl", "2xl", "3xl"]} 
@@ -79,7 +81,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location, tickets}
           >
             {event.title}
           </Heading>
-            <Flex alignItems="center" gap={3}>
+            <Flex alignItems="center" gap={isNotVoid(event.small_description) ? 3 : 0}>
               <Text>{event.small_description}</Text>
               <Tag 
                 p={1} 
@@ -114,7 +116,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({event, location, tickets}
                 >
                   Купить билет
               </Button>
-              <Link href={`/afisha/${event.id}-${event.slug}`}>
+              <Link href={`/afisha/${id}-${event.slug}`}>
                 <Button 
                   size={["md", "md", "lg", "lg", "lg"]}
                   bgColor="transparent"
