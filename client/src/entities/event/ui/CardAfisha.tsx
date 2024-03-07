@@ -137,7 +137,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ id, event, location, tic
         w="full" 
         pos="relative"
       >
-        <Image fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${event.image.url}`} alt={event.title} />
+        <Image style={{objectFit: "cover"}} fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${event.image.url}`} alt={event.title} />
       </chakra.div>
     </Flex>
   )

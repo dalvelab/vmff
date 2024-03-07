@@ -60,7 +60,7 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
               w="100%" 
               h={["300px", "400px", "380px", "360px", "400px"]}
             >
-              <Image fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} alt={title} />
+              <Image style={{objectFit: 'cover'}} fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} alt={title} />
             </chakra.div>
             <Flex flexDirection="column" alignItems="flex-start">
               <Flex

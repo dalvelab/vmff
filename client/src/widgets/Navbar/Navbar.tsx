@@ -41,8 +41,7 @@ export const Navbar = () => {
                 <Image
                   fill
                   src="/logo-header.svg" 
-                  alt='Логотип в меню' 
-                  style={{ fill: "red" }}
+                  alt='Логотип в меню'
                   priority={true}
                 />
             </chakra.div>

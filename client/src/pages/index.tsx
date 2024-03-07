@@ -82,18 +82,18 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
             >
               <Flex flexDir="column" pos="relative" gap={[2, 2, 3, 3, 3]}>  
                 {about.data.images.slice(0, 2).map((image) => (
-                    <Image key={image.id} width={330} height={315} src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} alt="Изображение галереи" />
+                    <Image style={{objectFit: 'cover'}} key={image.id} width={330} height={315} src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} alt="Изображение галереи" />
                 ))}
               </Flex>
               <chakra.div maxW={["full", "full", "full", "full", "430px"]} pos="relative">
                 {isNotVoid(about.data.images[2]) && (
-                  <Image fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${about.data.images[2].url}`} alt="Изображение галереи" />
+                  <Image style={{objectFit: 'cover'}} fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${about.data.images[2].url}`} alt="Изображение галереи" />
                 )}
               </chakra.div>
             </Grid>
             <chakra.div w="full" h={["240px", "400px", "520px", "430px", "430px"]} pos="relative">
               {isNotVoid(about.data.images[3]) && (
-                <Image fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${about.data.images[3].url}`} alt="Изображение галереи" />
+                <Image style={{objectFit: 'cover'}} fill src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${about.data.images[3].url}`} alt="Изображение галереи" />
               )}
             </chakra.div>
             </Flex>
