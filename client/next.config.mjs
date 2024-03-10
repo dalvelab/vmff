@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [{
-      protocol: 'http',
+      protocol: 'https',
       hostname: 'strapi.vmff.ru'
     }]
   }

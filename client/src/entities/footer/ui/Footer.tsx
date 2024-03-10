@@ -115,7 +115,7 @@ export const Footer: React.FC = () => {
             gap={[4, 4, 4, null, null]}
           >
             <Text fontSize="sm">ООО «Венский фестиваль», 2024</Text>
-            <Link href="" referrerPolicy="no-referrer" target="_blank">
+            <Link href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}/uploads/Politika_konfidenczialnosti_85f748c0c5.pdf`} referrerPolicy="no-referrer" target="_blank">
               <Text fontSize="sm" textDecoration="underline">Политика конфиденциальности</Text>
             </Link>
           </Flex>

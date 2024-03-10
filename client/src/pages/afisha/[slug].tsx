@@ -1,13 +1,10 @@
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Button, chakra, Container, Flex, Heading, Tag, Text } from '@chakra-ui/react';
 
 import { Afisha, getSingleAfisha } from '@/entities';
-import { SEO, LocationText, isVoid, getGenetiveRusMonth, getformatDateLocaleTime, getformatDateLocale } from '@/shared';
+import { SEO, LocationText, isVoid, getGenetiveRusMonth, Markdown, getformatDateLocaleTime, getformatDateLocale } from '@/shared';
 import type { ApiResponse } from '@/shared';
-
-import styles from './styles.module.css';
 
 export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { event, tickets, location } = afisha.data;
@@ -103,9 +100,7 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
             </Flex>
           </Flex>
           <chakra.div pt={5} pb={10} fontSize="xl">
-            <ReactMarkdown className={styles.description}>
-              {description}
-            </ReactMarkdown>
+            <Markdown description={description} />
           </chakra.div>
         </Container>
       </chakra.section>

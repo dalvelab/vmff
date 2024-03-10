@@ -5,7 +5,7 @@ import { Button, Heading, Container, chakra, Flex, Grid, Text } from '@chakra-ui
 
 import { CardAfisha, getAfisha, getSlider } from '@/entities';
 import type { Afisha, Slider } from '@/entities';
-import { isVoid, type ApiResponse, type Meta, isNotVoid } from '@/shared';
+import { isVoid, type ApiResponse, type Meta, isNotVoid, Markdown } from '@/shared';
 import { AfishaSliderWidget } from '@/widgets';
 import { AboutSectionResponse, getAbout } from '@/entities/about';
 import Image from 'next/image';
@@ -101,8 +101,12 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
               )}
             </chakra.div>
             </Flex>
-            <Flex maxW={["full", "full", "full", "400px", "460px"]}>
-              <Text fontSize={["lg", "xl", "xl", "xl", "xl"]} textAlign="justify">{about.data.description}</Text>
+            <Flex 
+              maxW={["full", "full", "full", "400px", "460px"]} 
+              fontSize={["lg", "xl", "xl", "xl", "xl"]} 
+              textAlign="justify"
+            >
+              <Markdown description={about.data.description} />
             </Flex>
           </Flex>
         </Container>

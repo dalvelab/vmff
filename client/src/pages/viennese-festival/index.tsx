@@ -1,14 +1,12 @@
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Container, Flex, Grid, Heading } from '@chakra-ui/react';
 
 import { getVienneseFestival } from '@/entities';
 import type { VienneseFestivalResponse } from '@/entities';
-import { SEO, isNotVoid, isEmptyArray } from '@/shared';
+import { SEO, isNotVoid, isEmptyArray, Markdown } from '@/shared';
 import type { ApiResponse } from '@/shared';
 
-import styles from './styles.module.css';
 import { SwipeGallery } from '@/widgets';
 
 export default function VienneseFestival({ vienneseFestival } : InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -51,10 +49,8 @@ export default function VienneseFestival({ vienneseFestival } : InferGetServerSi
                   )}
                 </chakra.div>
               </Flex>
-              <chakra.div mt={[2, 2, 0, 0, 0]} fontSize={["md", "lg", "lg", "lg", "lg"]}>
-                <ReactMarkdown className={styles.description}>
-                  {description}
-                </ReactMarkdown>
+              <chakra.div mt={2} fontSize={["md", "lg", "lg", "lg", "lg"]}>
+                <Markdown description={description} />
               </chakra.div>
             </Grid>
           </chakra.section>
