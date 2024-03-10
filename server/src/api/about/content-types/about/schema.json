@@ -23,6 +23,9 @@
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

@@ -797,6 +797,7 @@ export interface ApiAboutAbout extends Schema.SingleType {
   attributes: {
     images: Attribute.Media & Attribute.Required;
     description: Attribute.RichText & Attribute.Required;
+    title: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

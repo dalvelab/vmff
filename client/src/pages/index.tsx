@@ -68,7 +68,7 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
             textAlign={["left", "left", "left", "right", "right"]} 
             fontSize={["4xl", "4xl", "5xl", "6xl", "7xl"]}
           >
-            Что такое pop-up <br /> концерты
+            {about.data.title}
           </Heading>
           <Flex 
             justifyContent="space-between"
