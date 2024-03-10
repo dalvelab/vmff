@@ -67,6 +67,9 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
             as="h2" 
             textAlign={["left", "left", "left", "right", "right"]} 
             fontSize={["4xl", "4xl", "5xl", "6xl", "7xl"]}
+            mb={4}
+            w={["100%", "100%", "100%", "60%", "60%"]}
+            alignSelf="flex-end"
           >
             {about.data.title}
           </Heading>
@@ -74,6 +77,7 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
             justifyContent="space-between"
             flexDir={["column-reverse", "column-reverse", "column-reverse", "row", "row"]}
             gap={6}
+            pt={[2, 2, 4, 6, 6]}
           >
           <Flex flexDir="column" alignItems="flex-start" gap={[2, 2, 3, 3, 3]}>
             <Grid 
@@ -97,7 +101,7 @@ export default function Home({ afisha, slider, about }: InferGetServerSidePropsT
               )}
             </chakra.div>
             </Flex>
-            <Flex pt={[6, 6, 6, 10, 10]} maxW={["full", "full", "full", "400px", "460px"]}>
+            <Flex maxW={["full", "full", "full", "400px", "460px"]}>
               <Text fontSize={["lg", "xl", "xl", "xl", "xl"]} textAlign="justify">{about.data.description}</Text>
             </Flex>
           </Flex>
