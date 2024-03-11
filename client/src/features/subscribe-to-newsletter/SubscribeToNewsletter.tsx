@@ -67,7 +67,7 @@ export const SubscribeToNewsletter = () => {
     <>
       <Flex w="full">
         <Text fontSize={["xl", "xl", "2xl", "3xl", "3xl"]}>
-          Подпишись на новости, чтобы быть в курсе обновлений
+          Подпишитесь на рассылку и получайте новости первыми
         </Text>
       </Flex>
       <InputGroup>
