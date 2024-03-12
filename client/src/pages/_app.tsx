@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import type { AppProps } from "next/app";
 import Head from 'next/head'
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 import { Navbar } from "@/widgets";
 import { Footer } from "@/entities";
-import { chakraVMFFConfig, YAScript } from '@/shared';
+import { chakraVMFFConfig, YAScript, YandexMetrika} from '@/shared';
 
 import '../shared/styles.css';
 
@@ -19,8 +20,16 @@ export default function App({ Component, pageProps }: AppProps ) {
       <meta name="description" content="Музыкальные сезоны и фестивали" />
       <link rel="icon" href="/favicon.png" />
       <meta name="color-scheme" content="light only" />
+      {process.env.NEXT_PUBLIC_METRIKA === 'production' && (
+          <noscript>
+            <div>
+              <img src="https://mc.yandex.ru/watch/93393151" style={{ position: "absolute", left: "-9999px" }} alt="" />
+            </div>
+          </noscript>
+        )}
     </Head>
     <YAScript />
+    <YandexMetrika />
     <ChakraProvider theme={theme}>
       <Navbar />
       <chakra.main mt={16}>
