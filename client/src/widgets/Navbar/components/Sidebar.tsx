@@ -34,13 +34,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
         <Link href="/" onClick={onClose}>
           <Text>Главная</Text>
         </Link>
-        <Link href={isWelcomePage ? '#afisha' : '/afisha'} onClick={onClose}>
+        <Link href="/afisha" onClick={onClose}>
           <Text>Афиша</Text>
         </Link>
         <Link href={isWelcomePage ? '#about' : '/#about'} onClick={onClose}>
           <Text>О проекте</Text>
         </Link>
-        <Link href={isWelcomePage ? '#contacts' : '/#contacts'} onClick={onClose}>
+        <Link href="#contacts" onClick={onClose}>
           <Text>Контакты</Text>
         </Link>
         <Link href="/viennese-festival" onClick={onClose}>

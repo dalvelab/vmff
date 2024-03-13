@@ -47,9 +47,9 @@ export const Navbar = () => {
             </chakra.div>
           </Link>
           <Flex gap={8} display={['none', 'none', 'none', 'flex', 'flex']}>
-            <NavbarLink href={isWelcomePage ? '#afisha' : '/afisha'} text='Афиша и билеты' />
+            <NavbarLink href="/afisha" text='Афиша и билеты' />
             <NavbarLink href={isWelcomePage ? '#about' : '/#about'} text='О проекте' />
-            <NavbarLink href={isWelcomePage ? '#contacts' : '/#contacts'} text='Контакты' />
+            <NavbarLink href="#contacts" text='Контакты' />
             <NavbarLink href='/viennese-festival' text='История Венского' />
           </Flex>
           <chakra.div
