@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps ) {
       {process.env.NEXT_PUBLIC_METRIKA === 'production' && (
           <noscript>
             <div>
-              <img src="https://mc.yandex.ru/watch/93393151" style={{ position: "absolute", left: "-9999px" }} alt="" />
+              <img src="https://mc.yandex.ru/watch/96717190" style={{ position: "absolute", left: "-9999px" }} alt="" />
             </div>
           </noscript>
         )}
