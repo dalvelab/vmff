@@ -1,11 +1,10 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Head from "next/head";
 import { Link } from '@chakra-ui/next-js';
 import { Button, Heading, Container, chakra, Flex, Grid, Text } from '@chakra-ui/react';
 
 import { CardAfisha, getAfisha, getSlider } from '@/entities';
 import type { Afisha, Slider } from '@/entities';
-import { isVoid, type ApiResponse, type Meta, isNotVoid, Markdown } from '@/shared';
+import { isVoid, type ApiResponse, type Meta, isNotVoid, Markdown, SEO } from '@/shared';
 import { AfishaSliderWidget } from '@/widgets';
 import { AboutSectionResponse, getAbout } from '@/entities/about';
 import Image from 'next/image';
@@ -13,12 +12,13 @@ import Image from 'next/image';
 export default function Home({ afisha, slider, about }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
-      <Head>
+      <SEO>
         <title>Музыкальные сезоны и фестивали</title>
-        <meta name="description" content="Музыкальные сезоны и фестивали" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+        <meta name="description" content="Команда “Венского фестиваля музыкальных фильмов”, после небольшой паузы, возрождает проект в Екатеринбурге в новом формате. Это будут pop-up концерты на разных площадках" />
+        <meta property="og:title" content="Музыкальные сезоны и фестивали" />
+        <meta property="og:description" content="Команда “Венского фестиваля музыкальных фильмов”, после небольшой паузы, возрождает проект в Екатеринбурге в новом формате. Это будут pop-up концерты на разных площадках" />
+        <meta property="og:type" content="website" />
+      </SEO>
       <AfishaSliderWidget slider={slider.data} />
       <chakra.section pt={10} pb={10} id="afisha" scrollMarginTop={20}>
         <Container 

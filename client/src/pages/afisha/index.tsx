@@ -1,12 +1,11 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Head from "next/head";
 import { Heading, Container, chakra, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { AfishaFilters } from '@/features';
 import { CardAfisha, getAfisha, getFilteredAfisha } from '@/entities';
 import type { Afisha, Filter } from '@/entities';
-import { isVoid, getformatDateLocale, type ApiResponse, type Meta, isNotVoid, isEmptyArray } from '@/shared';
+import { isVoid, getformatDateLocale, type ApiResponse, type Meta, isNotVoid, isEmptyArray, SEO } from '@/shared';
 
 const defaultFilter: Filter = {
   month: 'all',
@@ -35,12 +34,13 @@ export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof ge
 
   return (
     <>
-      <Head>
+      <SEO>
         <title>Афиша | Музыкальные сезоны и фестивали</title>
-        <meta name="description" content="Музыкальные сезоны и фестивали" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+        <meta name="description" content="Афиша | Музыкальные сезоны и фестивали" />
+        <meta name="description" content="Афиша | Музыкальные сезоны и фестивали" />
+        <meta property="og:title" content="Музыкальные сезоны и фестивали" />
+        <meta property="og:description" content="Афиша | Музыкальные сезоны и фестивали" />
+      </SEO>
       <chakra.section pt={10} pb={10} id="afisha" scrollMarginTop={20}>
         <Container 
           maxWidth="container.xl" 

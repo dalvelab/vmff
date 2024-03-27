@@ -14,8 +14,11 @@ export const SEO: React.FC<SEOProps> = ({ children }) => {
   return (
     <Head>
       {children}
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta property="og:url" content={CANONICAL_DOMAIN + asPath} />
       <link rel="canonical" href={CANONICAL_DOMAIN + asPath} />
+      <link rel="icon" href="/favicon.ico" />
+      <meta property="og:type" content="website" />
     </Head>
   )
 }

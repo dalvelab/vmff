@@ -30,9 +30,9 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
   return (
     <>
       <SEO>
-        <title>{`${title} - | Музыкальные сезоны и фестивали`}</title>
+        <title>{`${title} | Музыкальные сезоны и фестивали`}</title>
         <meta name="description" content={small_description} />
-        <meta property="og:title" content={`${title} - | Музыкальные сезоны и фестивали`} />
+        <meta property="og:title" content={`${title} | Музыкальные сезоны и фестивали`} />
         <meta property="og:description" content={small_description} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} />
