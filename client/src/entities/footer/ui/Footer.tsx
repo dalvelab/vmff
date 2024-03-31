@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link } from '@chakra-ui/next-js';
 import Image from "next/image";
 import { Box, chakra, Container, Flex, Text } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 
 import { getFooter } from "../api";
-import { FooterResponse } from "../model";
 import { SubscribeToNewsletter } from "@/features";
-import { ApiResponse, isEmptyArray, isNotVoid, isVoid } from "@/shared";
+import { isEmptyArray, isNotVoid, isVoid } from "@/shared";
 
 export const Footer: React.FC = () => {
-  const [footer, setFooterData] = useState<ApiResponse<FooterResponse, null> | null>(null);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getFooter().then((data) => {
-      setFooterData(data);
-      setLoading(false);
-    })
-  }, [])
+  const { data, isLoading } = useQuery({
+    queryKey: ['footer'],
+    queryFn: getFooter,
+  })
 
   return (
     <chakra.footer bgColor="brand.100" id="contacts">
@@ -41,8 +34,8 @@ export const Footer: React.FC = () => {
           >
             <SubscribeToNewsletter />
           </Flex>
-          {isLoading || isVoid(footer?.data) ? (
-            <Text>Loading footer...</Text>
+          {isLoading || isVoid(data?.data) ? (
+            <Text color="white">Loading footer...</Text>
           ) : (
             <Flex 
               pt={10} 
@@ -58,17 +51,17 @@ export const Footer: React.FC = () => {
                   <Flex flexDir="column" gap={2}>
                     <chakra.span fontSize="sm" color="#A6A6A6">По всем вопросам</chakra.span>
                     <Flex color="white" fontSize="md" gap={4} flexDir="column">
-                      <Link href={`tel:${footer?.data.phone}`} _hover={{ color: "brand.200" }}>
-                        <Text>{footer?.data.phone}</Text>
+                      <Link href={`tel:${data?.data.phone}`} _hover={{ color: "brand.200" }}>
+                        <Text>{data?.data.phone}</Text>
                       </Link>
-                      <Link href={`mailto:${footer?.data.email}`} _hover={{ color: "brand.200" }}>
-                        <Text>{footer?.data.email}</Text>
+                      <Link href={`mailto:${data?.data.email}`} _hover={{ color: "brand.200" }}>
+                        <Text>{data?.data.email}</Text>
                       </Link>
                     </Flex>
                   </Flex>
                   <Flex flexDir="column" gap={4}>
-                    {isNotVoid(footer?.data.locations) && !isEmptyArray(footer.data.locations) && (
-                      footer?.data.locations?.map((location) => (
+                    {isNotVoid(data?.data.locations) && !isEmptyArray(data.data.locations) && (
+                      data?.data.locations?.map((location) => (
                         <Flex key={location.id} flexDir="column" gap={2}>
                           <chakra.span fontSize="sm" color="#A6A6A6">{location.name}</chakra.span>
                           <Link href={location.link} referrerPolicy="no-referrer" target="_blank">
@@ -83,8 +76,8 @@ export const Footer: React.FC = () => {
               <Flex flexDir="column" gap={4} justifyContent="flex-start">
                 <chakra.span fontSize="sm" color="#A6A6A6" textAlign={["left", "left", "right", "right", "right"]}>Социальные сети</chakra.span>
                 <Flex gap={4} justifyContent={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}>
-                {isNotVoid(footer?.data.socials) && !isEmptyArray(footer.data.socials) && (
-                    footer?.data.socials.map((social) => (
+                {isNotVoid(data?.data.socials) && !isEmptyArray(data.data.socials) && (
+                    data?.data.socials.map((social) => (
                       <Link key={social.id} href={social.link} referrerPolicy="no-referrer" target="_blank">
                         <Box 
                           display="flex" 

@@ -1,16 +1,42 @@
 import { useState } from 'react';
-import { Button, Flex, Input, InputGroup, InputRightAddon, Text, chakra, useToast } from "@chakra-ui/react"
+import { Button, Flex, Input, InputGroup, InputRightAddon, Text, chakra, useToast } from "@chakra-ui/react";
+import { useMutation } from '@tanstack/react-query';
 
 import { subscribeToNewsletter } from '@/entities';
-import { isNotVoid } from '@/shared';
-
-const emailValidation = /^\S+@\S+\.\S+$/; 
+import { emailValidation, isNotVoid } from '@/shared';
 
 export const SubscribeToNewsletter = () => {
   const toast = useToast();
 
   const [email, setEmail] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
+
+  const mutation = useMutation({
+    mutationFn: subscribeToNewsletter,
+    onSuccess: () => {
+      toast({
+        title: 'Успешно!',
+        description: "Вы подписались на рассылку",
+        status: 'success',
+        duration: 2500,
+        position: 'top-right',
+        isClosable: true,
+      });
+      setEmail('');
+    },
+    onError: () => {
+      setEmail('');
+
+      toast({
+        title: 'Произошла ошибка.',
+        description: "Попробуйте позже",
+        status: 'error',
+        duration: 2500,
+        position: 'top-right',
+        isClosable: true,
+      })
+    },
+  });
 
   const handleFormSubmition = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -23,44 +49,7 @@ export const SubscribeToNewsletter = () => {
       setValidationError(null);
     }
 
-    try {
-      const res = await subscribeToNewsletter(email);
-
-      if (!res.data) {
-        toast({
-          title: 'Произошла ошибка.',
-          description: "Попробуйте позже",
-          status: 'error',
-          duration: 2500,
-          position: 'top-right',
-          isClosable: true,
-        });
-
-        setEmail('');
-        return;
-      }
-
-      toast({
-        title: 'Сообщение отправлено.',
-        description: "Мы свяжемся с вами в ближайшее время",
-        status: 'success',
-        duration: 2500,
-        position: 'top-right',
-        isClosable: true,
-      });
-      setEmail('');
-    } catch (error) {
-      setEmail('');
-
-      toast({
-        title: 'Произошла ошибка.',
-        description: "Попробуйте позже",
-        status: 'error',
-        duration: 2500,
-        position: 'top-right',
-        isClosable: true,
-      })
-    }
+    mutation.mutate(email);
   }
 
   return (
