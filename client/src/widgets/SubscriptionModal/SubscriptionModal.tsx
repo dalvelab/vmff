@@ -111,6 +111,9 @@ export const SubscriptionModal = () => {
               </chakra.div>
               <Button
                 size="lg"
+                bgColor="brand.200" 
+                color="white"
+                _hover={{ bgColor: "brand.200" }}
                 onClick={subscribe}
               >
                 Подписаться
