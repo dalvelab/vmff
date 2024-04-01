@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useMutation } from "@tanstack/react-query";
-import { Button, chakra, Flex, Grid, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useToast } from "@chakra-ui/react"
+import { Button, chakra, Flex, Grid, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useToast } from "@chakra-ui/react"
 
 import { isNotVoid, emailValidation } from "@/shared";
 import { subscribeToNewsletter } from "@/entities";
@@ -84,11 +84,12 @@ export const SubscriptionModal = () => {
       <ModalOverlay />
       <ModalContent>
           <ModalHeader display="flex" alignItems="center">
-            <Text fontSize="3xl">Подпишитесь на рассылку</Text>
+            <ModalCloseButton />
           </ModalHeader>
           <ModalBody flexDir="column">
             <Text fontSize="xl">
-              В наших письмах нет спама. Только анонсы, закулисье концертов, эксклюзив от музыкантов и промокоды.
+              В наших письмах нет спама. Только анонсы, закулисье концертов, эксклюзив от музыкантов и промокоды.{" "}
+              <b>Подпишитесь</b>
             </Text>
             <Flex pt={5} pb={4} flexDir="column" gap={4}>
               <chakra.div>
@@ -108,10 +109,12 @@ export const SubscriptionModal = () => {
                 />
                 {isNotVoid(validationError) && <chakra.small mt={1} color="brand.200">{validationError}</chakra.small>}
               </chakra.div>
-              <Grid gap={2}>
-                <Button size="lg" colorScheme="green" onClick={subscribe}>Подписаться</Button>
-                <Button size="lg" onClick={onClose}>Закрыть</Button>
-              </Grid>
+              <Button
+                size="lg"
+                onClick={subscribe}
+              >
+                Подписаться
+              </Button>
             </Flex>
           </ModalBody>
       </ModalContent>
